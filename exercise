@@ -1,0 +1,30 @@
+DECLARE
+   TABEL_EXISTENCE NUMBER;
+   COUNTER INT;
+BEGIN
+    
+    SELECT COUNT(*) INTO TABEL_EXISTENCE FROM user_tables WHERE table_name = UPPER('CLIENTI');
+    
+    IF TABEL_EXISTENCE > 0 THEN 
+        DBMS_OUTPUT.put_line('table found');
+        insert into CLIENTI (flow, lyrics, column3, column4, style)
+        VALUES ('TEST1','TEST', 'TEST', 'TEST', 'TEST');
+    ELSE 
+        DBMS_OUTPUT.put_line('table not found');
+        
+    END IF;
+    
+    COUNTER := 0;
+    LOOP
+        IF COUNTER = 10 THEN EXIT;
+        ELSE 
+            COUNTER := COUNTER + 1;
+            DBMS_OUTPUT.put_line(COUNTER);
+        END IF;
+    END LOOP;
+    
+    COUNTER := 2 / 0;
+    EXCEPTION 
+        WHEN ZERO_DIVIDE THEN
+            DBMS_OUTPUT.put_line('ZERO DIVIDE EXCEPTION CAUGHT');
+END;   
